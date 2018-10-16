@@ -1,0 +1,33 @@
+{
+  "name": "bfx-facs-deflate",
+  "version": "0.1.0",
+  "description": "Bitfinex Deflate Facility",
+  "main": "index.js",
+  "private": false,
+  "engine": {
+    "node": ">=8.0"
+  },
+  "deprecated": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitfinexcom/bfx-facs-deflate.git"
+  },
+  "keywords": [
+    "bitfinex"
+  ],
+  "homepage": "https://github.com/bitfinexcom/bfx-facs-deflate#readme",
+  "bugs": {
+    "url": "https://github.com/bitfinexcom/bfx-facs-deflate/issues"
+  },
+  "dependencies": {
+    "async": "^2.6.1",
+    "bfx-facs-base": "git+https://github.com:bitfinexcom/bfx-facs-base.git",
+    "lodash": "^4.17.10"
+  },
+  "devDependencies": {
+    "standard": "^12.0.1"
+  },
+  "scripts": {
+    "test": "standard"
+  }
+}
