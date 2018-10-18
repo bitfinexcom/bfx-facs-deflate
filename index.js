@@ -1,6 +1,7 @@
 'use strict'
 
 const zlib = require('zlib')
+const archiver = require('archiver')
 const { pick } = require('lodash')
 const async = require('async')
 const Base = require('bfx-facs-base')
@@ -66,6 +67,47 @@ class DeflateFacility extends Base {
     return readStream.pipe(gzip)
   }
 
+  createZip (readStreams = [], params = {}) {
+    const _params = {
+      ...params,
+      zlib: {
+        level: 9,
+        ...this.params,
+        ...(params.zlib || {})
+
+      }
+    }
+    const archive = archiver('zip', _params)
+
+    let count = 1
+
+    readStreams.forEach((
+      {
+        stream,
+        data = { name: `file_${count}` }
+      }
+    ) => {
+      archive.append(
+        stream,
+        pick(
+          { ...data },
+          [
+            'name',
+            'date',
+            'mode',
+            'prefix',
+            'stats',
+            'store'
+          ]
+        )
+      )
+
+      count += 1
+    })
+
+    return archive
+  }
+
   createBuffGzip (
     readStream,
     isGzipOn = true,
@@ -76,6 +118,25 @@ class DeflateFacility extends Base {
       : readStream
 
     return this.streamToBuffer(stream)
+  }
+
+  createBuffZip (
+    readStreams = [],
+    isZipOn = true,
+    params = {}
+  ) {
+    if (isZipOn) {
+      const archive = this.createZip(readStreams, params)
+      const promise = this.streamToBuffer(archive)
+
+      archive.finalize()
+
+      return [promise]
+    } else {
+      return readStreams.map(stream => {
+        this.streamToBuffer(stream)
+      })
+    }
   }
 
   _stop (cb) {
