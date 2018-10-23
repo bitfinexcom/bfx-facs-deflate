@@ -133,8 +133,8 @@ class DeflateFacility extends Base {
 
       return [promise]
     } else {
-      return readStreams.map(stream => {
-        this.streamToBuffer(stream)
+      return readStreams.map(({ stream }) => {
+        return this.streamToBuffer(stream)
       })
     }
   }
