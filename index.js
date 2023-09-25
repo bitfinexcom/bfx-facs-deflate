@@ -2,7 +2,7 @@
 
 const zlib = require('zlib')
 const archiver = require('archiver')
-const { pick } = require('lodash')
+const { pick } = require('lib-js-util-base')
 const async = require('async')
 const Base = require('bfx-facs-base')
 
