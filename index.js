@@ -2,9 +2,9 @@
 
 const zlib = require('zlib')
 const archiver = require('archiver')
-const { pick } = require('lib-js-util-base')
+const { pick } = require('@bitfinex/lib-js-util-base')
 const async = require('async')
-const Base = require('bfx-facs-base')
+const Base = require('@bitfinex/bfx-facs-base')
 
 class DeflateFacility extends Base {
   constructor (caller, opts, ctx) {
