@@ -87,6 +87,8 @@ class DeflateFacility extends Base {
         data = { name: `file_${count}` }
       }
     ) => {
+      stream.once('error', err => archive.emit('error', err))
+
       archive.append(
         stream,
         pick(
@@ -129,9 +131,9 @@ class DeflateFacility extends Base {
       const archive = this.createZip(readStreams, params)
       const promise = this.streamToBuffer(archive)
 
-      archive.finalize()
+      const finalized = archive.finalize()
 
-      return [promise]
+      return [Promise.all([promise, finalized]).then(([buffer]) => buffer)]
     } else {
       return readStreams.map(({ stream }) => {
         return this.streamToBuffer(stream)
