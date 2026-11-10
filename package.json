@@ -26,10 +26,11 @@
     "async": "^3.2.6"
   },
   "devDependencies": {
-    "@bitfinex/lint-js": "^1.1.0"
+    "@bitfinex/lint-js": "^1.1.0",
+    "brittle": "^4.5.0"
   },
   "scripts": {
-    "test": "npm run lint",
+    "test": "npm run lint && brittle-node test/*.test.js",
     "lint": "bfx-lint-js .",
     "lint:fix": "bfx-lint-js . --fix"
   },
