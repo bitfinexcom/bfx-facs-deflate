@@ -24,13 +24,13 @@ test('createBuffZip rejects when a source stream errors', async () => {
   )
 })
 
-test('streamToBuffer retains its error listener after rejection', async () => {
+test('streamToBuffer removes its error listener after rejection', async () => {
   const source = new PassThrough()
   const buffered = facility.streamToBuffer(source)
 
   source.emit('error', new Error('first error'))
   await assert.rejects(buffered, /first error/)
-  assert.doesNotThrow(() => source.emit('error', new Error('later error')))
+  assert.throws(() => source.emit('error', new Error('later error')), /later error/)
 })
 
 test('createBuffZip rejects when finalization fails', async () => {

@@ -52,7 +52,7 @@ class DeflateFacility extends Base {
       stream.once('end', () => {
         resolve(Buffer.concat(bufs))
       })
-      stream.on('error', err => {
+      stream.once('error', err => {
         reject(err)
       })
     })
