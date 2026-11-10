@@ -20,7 +20,7 @@
     "url": "https://github.com/bitfinexcom/bfx-facs-deflate/issues"
   },
   "dependencies": {
-    "@bitfinex/bfx-facs-base": "git+https://github.com:bitfinexcom/bfx-facs-base.git#v2.0.0",
+    "@bitfinex/bfx-facs-base": "git+https://github.com/bitfinexcom/bfx-facs-base.git#v2.0.0",
     "@bitfinex/lib-js-util-base": "git+https://github.com/bitfinexcom/lib-js-util-base.git#v3.0.0",
     "archiver": "7.0.1",
     "async": "3.2.6"
